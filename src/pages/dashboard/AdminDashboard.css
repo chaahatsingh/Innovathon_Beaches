@@ -1,0 +1,169 @@
+.admin-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #021526 0%, #0d47a1 100%);
+  color: white;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background: #021526;
+  backdrop-filter: blur(10px);
+  border-right: 1px solid #021526;
+  padding: 2rem 1rem;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+}
+
+.admin-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-content {
+  margin-left: 250px;
+  padding: 2rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.2s;
+  box-shadow: rgba(92, 135, 202, 0.8) 0 0 8px 2px;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+}
+
+.data-table {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.MuiTabs-root {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.MuiTab-root {
+  color: white !important;
+  opacity: 0.7;
+}
+
+.MuiTab-root.Mui-selected {
+  opacity: 1;
+}
+
+.MuiTableCell-head {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  font-weight: bold !important;
+  border-bottom: none !important;
+  font-size: 0.9rem !important;
+}
+
+.MuiTableCell-body {
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  font-size: 0.875rem !important;
+}
+
+.MuiTableRow-root:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.MuiTableRow-root:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.fraudulent {
+  color: #ff5252 !important;
+  font-weight: bold !important;
+  text-transform: uppercase;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.5px;
+}
+
+.legitimate {
+  color: #69f0ae !important;
+  font-weight: bold !important;
+  text-transform: uppercase;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.5px;
+}
+
+.transaction-details-table {
+  background: black !important;
+  margin: 0 !important;
+}
+
+.transaction-details-table .MuiTableCell-root {
+  padding: 4px 8px !important;
+  border: none !important;
+  background: black !important;
+}
+
+.transaction-details-table .MuiTableRow-root:hover {
+  background: black !important;
+}
+
+table{
+  background-color: #021526;
+}
+
+.refresh-time {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  margin-top: 1rem;
+  text-align: right;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
