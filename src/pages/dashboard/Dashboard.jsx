@@ -121,11 +121,11 @@ const Dashboard = () => {
       const corsProxy = 'https://thingproxy.freeboard.io/fetch/';
       const targetUrl = 'https://money-laundering.onrender.com/predict';
       
-      const response = await axios.post(corsProxy + targetUrl, formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
+      const response = await axios.post('https://money-laundering.onrender.com/predict', formDataToSend, {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
+});
 
       if (response.data && response.data.prediction) {
         setPredictionResult(response.data.prediction);
