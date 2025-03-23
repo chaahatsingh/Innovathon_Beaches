@@ -70,11 +70,11 @@ const InvoiceChecker = () => {
       const corsProxy = 'https://thingproxy.freeboard.io/fetch/';
       const targetUrl = 'https://fraud-receipt-detector.onrender.com/upload';
       
-      const response = await axios.post(corsProxy + targetUrl, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-      });
+      const response = await axios.post('https://fraud-receipt-detector.onrender.com/upload', formData, {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  },
+});
 
       setResult(response.data);
 
