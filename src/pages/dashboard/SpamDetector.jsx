@@ -28,13 +28,13 @@ const SpamDetector = () => {
       const corsProxy = 'https://thingproxy.freeboard.io/fetch/';
       const targetUrl = 'https://spam-mail-detector-swr3.onrender.com/predict';
       
-      const response = await fetch(corsProxy + targetUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ message: email })
-      });
+const response = await fetch('https://spam-mail-detector-swr3.onrender.com/predict', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ message: email })
+});
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
