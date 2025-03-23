@@ -128,7 +128,7 @@ const SpamDetector = () => {
         sx={{
           p: 4,
           width: '100%',
-          background: 'rgba(19, 47, 76, 0.8)',
+          background: 'rgba(30, 41, 59, 0.5)',
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>

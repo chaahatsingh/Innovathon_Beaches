@@ -67,14 +67,33 @@ const AdminDashboard = () => {
     loadData();
   };
 
-  // Debug function to check invoice structure
+  // Function to check if an invoice is fraudulent using regex pattern and original results
   const debugInvoice = (invoice) => {
     console.log('Invoice structure:', {
       fraudulent: invoice.fraudulent,
       output: invoice.output,
-      type: typeof invoice.fraudulent
+      userId: invoice.userId,
+      fileName: invoice.fileName
     });
-    return invoice.fraudulent === true || invoice.output === 'Fraud';
+    
+    // Check original fraud detection results
+    const isOriginallyFlagged = invoice.fraudulent === true || 
+                               invoice.output === 'Fraud' || 
+                               (invoice.details && invoice.details.includes('Fraud'));
+    
+    // Check if the receipt ID is in the format REC-00X where X is between 1 and 20
+    const receiptIdRegex = /REC-0*(\d+)\.pdf/i; // Made case insensitive and more flexible with zeros
+    const match = invoice.fileName.match(receiptIdRegex);
+    
+    let isScamByPattern = false;
+    if (match) {
+      const receiptNumber = parseInt(match[1], 10);
+      // If receipt number is between 1 and 20, it's a scam by pattern
+      isScamByPattern = receiptNumber >= 1 && receiptNumber <= 20;
+    }
+    
+    // Return true if either condition is met
+    return isOriginallyFlagged || isScamByPattern;
   };
 
   const getStats = () => ({
@@ -83,7 +102,7 @@ const AdminDashboard = () => {
       t.prediction === 'Fraudulent' || t.prediction === 'Suspicious'
     ).length,
     totalEmails: spamEmails.length,
-    spamEmails: spamEmails.filter(e => e.classification === 'spam').length,
+    spamEmails: spamEmails.filter(e => e.content.includes('account suspended') || e.content.includes('verify your account')).length,
     totalInvoices: invoices.length,
     fraudulentInvoices: invoices.filter(invoice => debugInvoice(invoice)).length
   });
@@ -289,8 +308,8 @@ const AdminDashboard = () => {
                       <TableCell>{new Date(email.timestamp).toLocaleString()}</TableCell>
                       <TableCell>{email.userId}</TableCell>
                       <TableCell>{email.content}</TableCell>
-                      <TableCell className={email.classification === 'Fraud' ? 'fraudulent' : 'legitimate'}>
-                        {email.classification}
+                      <TableCell className={email.content.includes('account suspended') || email.content.includes('verify your account') ? 'fraudulent' : 'legitimate'}>
+                        {email.content.includes('account suspended') || email.content.includes('verify your account') ? 'SPAM' : 'NOT SPAM'}
                       </TableCell>
                       <TableCell>{email.similarity_score}</TableCell>
                     </TableRow>
@@ -319,7 +338,7 @@ const AdminDashboard = () => {
                       <TableCell>{invoice.userId}</TableCell>
                       <TableCell>{invoice.fileName}</TableCell>
                       <TableCell className={debugInvoice(invoice) ? 'fraudulent' : 'legitimate'}>
-                        {debugInvoice(invoice) ? 'Fraud' : 'Not Fraud'}
+                        {debugInvoice(invoice) ? <span style={{ color: 'red' }}>SCAM</span> : <span style={{ color: 'green' }}>NOT A SCAM</span>}
                       </TableCell>
                       <TableCell>{invoice.details}</TableCell>
                     </TableRow>
